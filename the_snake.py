@@ -190,7 +190,6 @@ def main():
     apple = Apple()
 
     while True:
-        clock.tick(SPEED)
 
         # Обработка действий игрока
         snake.handle_keys()
@@ -207,6 +206,9 @@ def main():
         snake.draw()
         apple.draw()
         pygame.display.flip()
+
+        # Ограничение частоты кадров
+        clock.tick(60)  # Ограничение до 60 кадров в секунду
 
 
 if __name__ == '__main__':
