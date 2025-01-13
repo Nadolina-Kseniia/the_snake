@@ -64,6 +64,7 @@ LEFT = (-1, 0)
 RIGHT = (1, 0)
 
 
+# Класс ключей
 def handle_keys(snake):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -82,6 +83,7 @@ def handle_keys(snake):
 
 # Класс змейки
 class Snake(GameObject):
+    # Класс, представляющий змейку в игре.
     def __init__(self):
         self.positions = [(GRID_WIDTH // 2, GRID_HEIGHT // 2)]
         self.last = None
@@ -165,6 +167,7 @@ class Snake(GameObject):
 
 # Класс яблока
 class Apple(GameObject):
+    # класс Цвет
     def __init__(self):
         self.body_color = APPLE_COLOR  # Определяем атрибут body_color
         self.randomize_position()  # Случайная позиция при создании
@@ -181,6 +184,7 @@ class Apple(GameObject):
         super().draw(self.body_color)
 
 
+# Основная функция
 def main():
     # Инициализация PyGame:
     pygame.init()
@@ -189,6 +193,7 @@ def main():
     snake = Snake()
     apple = Apple()
 
+    # пока верно
     while True:
 
         # Обработка действий игрока
@@ -211,5 +216,6 @@ def main():
         clock.tick(60)  # Ограничение до 60 кадров в секунду
 
 
+# вызываем
 if __name__ == '__main__':
     main()
