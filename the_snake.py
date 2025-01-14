@@ -43,12 +43,18 @@ clock = pygame.time.Clock()
 
 """ Класс Объекта """
 # Базовый класс для игровых объектов
+
+
 class GameObject:
+    """ функция"""
+
     def __init__(self, x=0, y=0):  # Исправлено на __init__
         self.position = (x, y)
         self.body_color = "default_color"  # Добавьте атрибут body_color
 
     """ Функция рисования Объекта """
+    # Функция рисования Объекта
+
     def draw(self, color):
         rect = pygame.Rect(
             self.position[0] * GRID_SIZE,
@@ -66,8 +72,10 @@ LEFT = (-1, 0)
 RIGHT = (1, 0)
 
 
-# Класс ключей
 """ ручное управление """
+# Класс ключей
+
+
 def handle_keys(snake):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -86,6 +94,8 @@ def handle_keys(snake):
 
 # Класс змейки
 """ Класс змейки """
+
+
 class Snake(GameObject):
     # Класс, представляющий змейку в игре.
     def __init__(self):
@@ -97,6 +107,7 @@ class Snake(GameObject):
         self.next_direction = UP
 
     """ Ручное управление """
+
     def handle_keys(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -113,6 +124,7 @@ class Snake(GameObject):
                     self.next_direction = RIGHT
 
     """ апдейт """
+
     def update(self):
         self.last = self.positions[-1]
         head_x, head_y = self.positions[0]
@@ -120,8 +132,9 @@ class Snake(GameObject):
         new_head = (head_x + delta_x, head_y + delta_y)
         self.positions.insert(0, new_head)
         self.positions.pop()
-    
+
     """ запуск """
+
     def move(self, direction):
         if direction == 'up':
             self.position[1] += 1
@@ -131,20 +144,24 @@ class Snake(GameObject):
             self.position[0] -= 1
         elif direction == 'right':
             self.position[0] += 1
-    
+
     """ позиция головы змеи """
+
     def get_head_position(self):
         return self.position
 
     """ сброс позиции головы змеи """
+
     def reset(self):
         self.position = [0, 0]  # Сброс к начальной позиции
 
     """ гров """
+
     def grow(self):
         self.positions.append(self.last)
-    
+
     """ рисование """
+
     def draw(self):
         for position in self.positions:
             rect = pygame.Rect(
@@ -156,12 +173,14 @@ class Snake(GameObject):
             pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     """ апдейт """
+
     def update_direction(self):
         if self.next_direction:
             self.direction = self.next_direction
             self.next_direction = None
 
     """ рисование """
+
     def move(self, direction):
         # Логика перемещения змеи
         if direction == 'up':
@@ -173,6 +192,7 @@ class Snake(GameObject):
         elif direction == 'right':
             self.position[0] += 1
     """ сброс """
+
     def reset(self):
         # Логика сброса состояния змеи
         self.position = [0, 0]  # Сброс к начальной позиции
@@ -180,14 +200,18 @@ class Snake(GameObject):
 
 """ класс яблочка """
 # Класс яблока
+
+
 class Apple(GameObject):
     # класс Цвет
     """ инит """
+
     def __init__(self):
         self.body_color = APPLE_COLOR  # Определяем атрибут body_color
         self.randomize_position()  # Случайная позиция при создании
 
     """ рандомная позиция """
+
     def randomize_position(self):
         # Генерируем новые случайные координаты для яблока
         self.position = (
@@ -196,6 +220,7 @@ class Apple(GameObject):
         )
 
     """ рисование """
+
     def draw(self):
         # Используем метод родительского класса для отрисовки
         super().draw(self.body_color)
@@ -203,6 +228,8 @@ class Apple(GameObject):
 
 """ основная функция """
 # Основная функция
+
+
 def main():
     # Инициализация PyGame:
     pygame.init()
